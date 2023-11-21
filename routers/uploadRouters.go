@@ -1,8 +1,9 @@
 package routers
 
 import (
+	uploadController "Rehub_Microservice/controllers"
+
 	"github.com/gin-gonic/gin"
-  "Rehub_Microservice/controllers"
 )
 
 func SetupRouter() *gin.Engine{
@@ -17,6 +18,7 @@ func SetupRouter() *gin.Engine{
   upload := r.Group("/upload")
   {
     upload.POST("/uploadFile", uploadController.UploadFile)
+    upload.POST("/downloadFile", uploadController.DownloadFile)
   }
 
 
