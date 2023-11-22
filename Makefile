@@ -1,5 +1,5 @@
 dev:
-	gin -i -a 8080 -p 3000 run .
+	gin -i -a 8080 -p 3001 run .
 
 build:
 	docker stop rehub-microservice || true

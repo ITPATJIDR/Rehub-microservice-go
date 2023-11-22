@@ -4,6 +4,7 @@ import (
 	fileModel "Rehub_Microservice/model"
 	"crypto/rand"
 	"encoding/hex"
+	"fmt"
 	"io"
 	"io/ioutil"
 	"net/http"
@@ -76,6 +77,7 @@ func DownloadFile(c *gin.Context) {
 	var filePath fileModel.FileSturct
 
 	if err := c.ShouldBindJSON(&filePath); err != nil {
+		fmt.Print("HI")
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 	}
 
