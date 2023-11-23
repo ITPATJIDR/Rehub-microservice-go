@@ -1,10 +1,12 @@
 package main
 
 import (
-  "Rehub_Microservice/routers"
+	"Rehub_Microservice/routers"
 )
 
 func main() {
-  r := routers.SetupRouter()
-  r.Run()
+
+	r := routers.SetupRouter()
+	r.Run()
+
 }
