@@ -104,3 +104,26 @@ func DownloadFile(c *gin.Context) {
 
 	c.Writer.Flush()
 }
+
+func UploadVideo(c *gin.Context) {
+	file, err := c.FormFile("videoBlob")
+	if err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{
+			"error": err.Error(),
+		})
+		return
+	}
+
+	filename := "videos/" + file.Filename + ".webm"
+	err = c.SaveUploadedFile(file, filename)
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{
+			"error": err.Error(),
+		})
+		return
+	}
+
+	c.JSON(http.StatusOK, gin.H{
+		"data": file,
+	})
+}

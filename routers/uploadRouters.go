@@ -27,6 +27,7 @@ func SetupRouter() *gin.Engine {
 	{
 		upload.POST("/uploadFile", uploadController.UploadFile)
 		upload.POST("/downloadFile", uploadController.DownloadFile)
+		upload.POST("/uploadVideo", uploadController.UploadVideo)
 	}
 
 	return r
