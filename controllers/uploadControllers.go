@@ -106,6 +106,8 @@ func DownloadFile(c *gin.Context) {
 }
 
 func UploadVideo(c *gin.Context) {
+	folderName := c.PostForm("folderName")
+
 	file, err := c.FormFile("videoBlob")
 	if err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{
@@ -114,7 +116,15 @@ func UploadVideo(c *gin.Context) {
 		return
 	}
 
-	filename := "videos/" + file.Filename + ".webm"
+	bytes := make([]byte, 10)
+	_, err = rand.Read(bytes)
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{
+			"error": err.Error(),
+		})
+	}
+
+	filename := `C:\Users\CoSI-Lenovite\Desktop\code\Rehub-microservice-go\videos/` + folderName + "/" + folderName + "_" + hex.EncodeToString(bytes) + ".webm"
 	err = c.SaveUploadedFile(file, filename)
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{
@@ -124,6 +134,6 @@ func UploadVideo(c *gin.Context) {
 	}
 
 	c.JSON(http.StatusOK, gin.H{
-		"data": file,
+		"filename": filename,
 	})
 }
